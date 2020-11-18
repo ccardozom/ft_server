@@ -4,34 +4,34 @@ FROM debian:buster
 RUN apt-get update
 RUN apt-get upgrade -y
 
-# INSTALL NGINX
+# INSTALA NGINX
 RUN apt-get -y install nginx
 
-# INSTALL MYSQL
+# INSTALA MYSQL
 RUN apt-get -y install mariadb-server
 
-# INSTALL PHP
+# INSTALA PHP
 RUN apt-get -y install php7.3 php-mysql php-fpm php-cli php-mbstring
 
-# INSTALL TOOLS
+# INSTALAR HERRAMIENTA WGET
 RUN apt-get -y install wget
 
-# COPY CONTENT
+# COPIAR ARCHIVOS CON LAS CONFIGURACIONES DESDE SRCS(LOCAL) AL CONTENEDOR
+COPY ./srcs/nginx.conf /etc/nginx/sites-available/localhost
+RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
 COPY ./srcs/start.sh /var/
 COPY ./srcs/mysql_setup.sql /var/
 COPY ./srcs/wordpress.sql /var/
 COPY ./srcs/wordpress.tar.gz /var/www/html/
-COPY ./srcs/nginx.conf /etc/nginx/sites-available/localhost
-RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
 
-# INSTALL PHPMYADMIN
+# INSTALA PHPMYADMIN
 WORKDIR /var/www/html/
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz && rm -rf phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN mv phpMyAdmin-4.9.0.1-all-languages phpmyadmin
 COPY ./srcs/config.inc.php phpmyadmin
 
-# INSTALL WORDPRESS
+# INSTALA WORDPRESS
 RUN wget -c https://wordpress.org/latest.tar.gz
 RUN tar -xvf latest.tar.gz && rm -rf latest.tar.gz
 RUN chmod 755 -R wordpress
