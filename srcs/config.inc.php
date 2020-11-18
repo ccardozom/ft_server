@@ -13,7 +13,7 @@
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = 'abcdefghijklmnopqrstuvwxyz123456'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = 'mysql config'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 /**
  * Servers configuration
  */
@@ -57,6 +57,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = true;
 // $cfg['Servers'][$i]['central_columns'] = 'pma__central_columns';
 // $cfg['Servers'][$i]['designer_settings'] = 'pma__designer_settings';
 // $cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
+$cfg['TempDir'] = 'tmp';
 /**
  * End of servers configuration
  */

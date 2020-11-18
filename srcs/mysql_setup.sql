@@ -1,7 +1,9 @@
 CREATE DATABASE wordpress;
 
-GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost';
+CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'paraguayo'
+ 
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 
-update mysql.user set plugin = 'mysql_native_password' where user='root';
+/*update mysql.user set plugin = 'mysql_native_password' where user='root';
